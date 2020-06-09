@@ -9,7 +9,7 @@ const Router = require('koa-router');
 // 导入控制层
 const usersController = require('../../controllers/usersController');
 const miniprogramController = require('../../controllers/miniprogram');
-
+const dbsController = require('../../controllers/building');
 let usersRouter = new Router();
 
 usersRouter
@@ -17,5 +17,8 @@ usersRouter
   .post('/users/findUserName', usersController.FindUserName)
   .post('/users/register', usersController.Register)
   .post('/wx/openid', miniprogramController.Openid)
-
+  .post('/building/add', dbsController.addBuilding)
+  .get('/building/delete', dbsController.removeBuilding)
+  
+  
 module.exports = usersRouter;
