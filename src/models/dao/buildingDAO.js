@@ -6,13 +6,22 @@
  * @LastEditTime: 2020-03-15 00:15:49
  */
 const db = require('../db.js')
+const trans = require('../transaction')
 
 module.exports = {
   insertBuilding: async (info) => {
-    const sql = 'insert into b_buildings values(?)'
+    const sql = 'insert into b_buildings SET  ?'
     return await db.query(sql, info)
+    // const sql =
+    //   'insert into b_buildings set buildingDesc=?,buildingFloor=?,buildingName=?,everyFloorDoors=?'
+    // return await db.query(sql, [
+    //   buildingDesc,
+    //   buildingFloor,
+    //   buildingName,
+    //   everyFloorDoors,
+    // ])
   },
-  searchBuilding: async () => {
+  searchBuildings: async () => {
     const sql = 'select * from b_buildings;'
     return await db.query(sql)
   },
@@ -20,12 +29,12 @@ module.exports = {
     const sql = 'DELETE FROM `b_buildings` WHERE id=?'
     return await db.query(sql, [buildingId])
   },
-  searchRooms: async () => {
-    const sql = 'select * from b_buildings;'
-    return await db.query(sql)
-  },
   insertRooms: async (roomlist) => {
-    const sql = 'insert into b_rooms values ?'
-    return await db.query(sql, roomlist)
+    const sql = 'insert into b_rooms SET ?'
+    return await trans.transaction(sql, roomlist)
+  },
+  searchRooms: async (id) => {
+    const sql = 'select * from b_rooms where buildingId=?;'
+    return await db.query(sql[id])
   },
 }

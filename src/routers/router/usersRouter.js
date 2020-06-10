@@ -15,10 +15,13 @@ let usersRouter = new Router();
 usersRouter
   .post('/users/login', usersController.Login)
   .post('/users/findUserName', usersController.FindUserName)
+  .get('/users/info', usersController.UserInfo)
   .post('/users/register', usersController.Register)
   .post('/wx/openid', miniprogramController.Openid)
   .post('/building/add', dbsController.addBuilding)
   .get('/building/delete', dbsController.removeBuilding)
-  
+  .get('/building/list', dbsController.getBuildings)
+  .get('/building/roomList', dbsController.getRoomsByBuildingId)
+
   
 module.exports = usersRouter;
