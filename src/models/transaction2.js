@@ -27,8 +27,9 @@ const transaction = (transList) => {
       let trans2 = transList[1]
       for (let index = 0; index < trans2.vals.length; index++) {
         const row = trans2.vals[index]
-        delete row.key
-        row.buildingId = result1.insertId
+
+        delete row.id
+        row.phaseId = result1.insertId
         asyncRes = await sqlFac.asyncQuery(connection, trans2.sql, row)
         if (asyncRes.isError) {
           // 如果错误 回滚
@@ -36,10 +37,26 @@ const transaction = (transList) => {
           break
         }
       }
+
+      let trans3 = transList[2]
+      for (let index = 0; index < trans3.vals.length; index++) {
+        const row = trans3.vals[index]
+        row.phaseId = result1.insertId
+        asyncRes = await sqlFac.asyncQuery(connection, trans3.sql, row)
+        if (asyncRes.isError) {
+          // 如果错误 回滚
+          await sqlFac.asyncRollback(connection)
+          break
+        }
+      }
+
+
+
+
     }
     await sqlFac.asyncCommit(connection)
-    console.log( result1)
-    resolve(asyncRes.isError ? asyncRes : { buildingId: result1.insertId })
+
+    resolve(asyncRes.isError ? asyncRes : { phaseId: result1.insertId })
     await sqlFac.asyncEnd(connection)
   })
 }

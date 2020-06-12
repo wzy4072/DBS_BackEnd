@@ -21,7 +21,8 @@ usersRouter
   .post('/building/add', dbsController.addBuilding)
   .get('/building/delete', dbsController.removeBuilding)
   .get('/building/list', dbsController.getBuildings)
-  .get('/building/roomList', dbsController.getRoomsByBuildingId)
+  .get('/building/roomList/:buildingId', dbsController.getRoomsByBuildingId)
+  .post('/phase/add', dbsController.addPhase)
 
   
 module.exports = usersRouter;
