@@ -71,4 +71,22 @@ module.exports = {
         result
       }
   },
+
+  searchPhase: async (ctx) => {
+    let result = await bDAO.searchPhase()
+    if (result)
+      ctx.body = {
+        code: 20000,
+        result:result
+      }
+  },
+  searchAmount: async (ctx) => {
+    let  { pahseId,buildingId,billId } = ctx.request.body
+    let result = await bDAO.searchAmount( { pahseId,buildingId,billId })
+    if (result)
+      ctx.body = {
+        code: 20000,
+        result
+      }
+  },
 }

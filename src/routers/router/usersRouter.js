@@ -23,6 +23,9 @@ usersRouter
   .get('/building/list', dbsController.getBuildings)
   .get('/building/roomList/:buildingId', dbsController.getRoomsByBuildingId)
   .post('/phase/add', dbsController.addPhase)
+  .post('/phase/search', dbsController.searchPhase)
+  .post('/phase/bill', dbsController.searchAmount)
+
 
   
 module.exports = usersRouter;

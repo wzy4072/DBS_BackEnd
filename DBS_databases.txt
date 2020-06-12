@@ -1,0 +1,25 @@
+database dbs_receipt
+
+1 b_buildings    		// id buildingName buildingDesc buildingFloor everyFloorDoors  
+
+2 b_rooms			// id buildingId roomName roomFee waterPrice electricityPrice cleanFee netFee
+
+3 b_building_room		///  buildingId  roomId
+ 
+4 b_charges		// id buildingId  key chargeName chargeAmount
+
+5 b_building_charge		/// buildingId chargeId 
+
+6 p_phases		// id buildingId phaseName
+
+7 p_meters		// id buildingId phaseId waterMeter electricityMeter
+
+8 p_phase_metters		// meterId buildingId
+	
+9 p_billamount		// id buildingId phaseId roomId roomName  roomFee  waterPrice electricityPrice  cleanFee  waterMeter electricityMeter  lastwaterMeter lastelectricityMeter   
+
+11 p_elsebill		// id phaseId  roomId  chargeName chargeAmount 
+
+
+
+	
